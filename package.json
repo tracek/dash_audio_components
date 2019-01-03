@@ -17,7 +17,8 @@
   "author": "Lukasz Tracewski lukasz.tracewski@outlook.com",
   "license": "MIT",
   "dependencies": {
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "react-sound": "^1.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
