@@ -1,7 +1,7 @@
 {
   "name": "dash_audio_components",
-  "version": "0.0.1",
-  "description": "Project Description",
+  "version": "1.0.0",
+  "description": "Dash component to play audio files",
   "main": "build/index.js",
   "scripts": {
     "start": "webpack-serve ./webpack.serve.config.js --open",
@@ -15,9 +15,15 @@
     "build:all-activated": "(. venv/bin/activate || venv\\scripts\\activate && npm run build:all)"
   },
   "author": "Lukasz Tracewski lukasz.tracewski@outlook.com",
+  "contributors": [{
+    "email": "yavalvas@gmail.com",
+    "name": "Aleksandr Iavorskii"
+  }
+  ],
   "license": "MIT",
   "dependencies": {
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "react-sound": "^1.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

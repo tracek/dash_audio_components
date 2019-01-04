@@ -5,26 +5,28 @@ from dash.development.base_component import Component, _explicitize_args
 
 class DashAudioComponents(Component):
     """A DashAudioComponents component.
-ExampleComponent is an example component.
-It takes a property, `label`, and
-displays it.
-It renders an input with the property `value`
-which is editable by the user.
+DashAudioComponent to play sounds.
 
 Keyword arguments:
+- url (string; required)
+- autoLoad (boolean; optional)
+- playStatus (required)
+- playbackRate (number; optional)
+- volume (number; optional)
+- position (number; optional)
+- playFromPosition (number; optional)
 - id (string; optional): The ID used to identify this component in Dash callbacks
-- label (string; required): A label that will be printed when this component is rendered.
-- value (string; optional): The value displayed in the input
+- loop (boolean; optional)
 
 Available events: """
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, label=Component.REQUIRED, value=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'label', 'value']
+    def __init__(self, onLoading=Component.UNDEFINED, onLoad=Component.UNDEFINED, onResume=Component.UNDEFINED, onBufferChange=Component.UNDEFINED, url=Component.REQUIRED, playbackRate=Component.UNDEFINED, playStatus=Component.REQUIRED, autoLoad=Component.UNDEFINED, volume=Component.UNDEFINED, onError=Component.UNDEFINED, onPause=Component.UNDEFINED, onStop=Component.UNDEFINED, onFinishedPlaying=Component.UNDEFINED, position=Component.UNDEFINED, onPlaying=Component.UNDEFINED, playFromPosition=Component.UNDEFINED, id=Component.UNDEFINED, loop=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['url', 'id', 'playbackRate', 'playStatus', 'autoLoad', 'volume', 'position', 'playFromPosition', 'loop']
         self._type = 'DashAudioComponents'
         self._namespace = 'dash_audio_components'
         self._valid_wildcard_attributes =            []
         self.available_events = []
-        self.available_properties = ['id', 'label', 'value']
+        self.available_properties = ['url', 'id', 'playbackRate', 'playStatus', 'autoLoad', 'volume', 'position', 'playFromPosition', 'loop']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')
@@ -32,7 +34,7 @@ Available events: """
         _locals.update(kwargs)  # For wildcard attrs
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
 
-        for k in ['label']:
+        for k in [u'url', u'playStatus']:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
