@@ -29,21 +29,24 @@ app.layout = html.Div([
     dash_audio_components.DashAudioComponents(
         id='audio-player',
         url='https://storage.googleapis.com/audio-files-samples/SampleAudio_0.4mb.mp3',
-        playStatus=PlayStatuses.STOPPED.value
+        playStatus=PlayStatuses.STOPPED.value,
+        playFromPosition=1000,
+        stopPosition=3000
     )
 ])
 
 @app.callback(
-    Output('audio-player', 'playStatus'),
+    Output('audio-player', 'overrideProps'),
     [
         Input('playAudio', 'n_clicks')
     ]
 )
 def btn_click_play_callback(n_clicks):
     if n_clicks is not None:
-        return (PlayStatuses.PLAYING.value
-                if n_clicks % 2 != 0
-                else PlayStatuses.STOPPED.value)
+        return {'playStatus': (PlayStatuses.PLAYING.value
+                               if n_clicks % 2 != 0
+                               else PlayStatuses.STOPPED.value),
+                'volume': 30}
 
 @app.callback(
     Output('output', 'children'),

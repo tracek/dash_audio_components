@@ -16,10 +16,9 @@
   },
   "author": "Lukasz Tracewski lukasz.tracewski@outlook.com",
   "contributors": [{
-    "email": "yavalvas@gmail.com",
-    "name": "Aleksandr Iavorskii"
-  }
-  ],
+      "email": "yavalvas@gmail.com",
+      "name": "Aleksandr Iavorskii"
+  }],
   "license": "MIT",
   "dependencies": {
     "ramda": "^0.25.0",
