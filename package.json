@@ -1,6 +1,6 @@
 {
   "name": "dash_audio_components",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Dash component to play audio files",
   "main": "build/index.js",
   "scripts": {
