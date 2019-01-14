@@ -14,10 +14,10 @@
     "build:all": "npm run build:js && npm run build:js-dev && npm run build:py",
     "build:all-activated": "(. venv/bin/activate || venv\\scripts\\activate && npm run build:all)"
   },
-  "author": "Lukasz Tracewski lukasz.tracewski@outlook.com",
+  "author": "Aleksandr Iavorskii yavalvas@gmail.com",
   "contributors": [{
-      "email": "yavalvas@gmail.com",
-      "name": "Aleksandr Iavorskii"
+      "email": "lukasz.tracewski@outlook.com",
+      "name": "Lukasz Tracewski"
   }],
   "license": "MIT",
   "dependencies": {
