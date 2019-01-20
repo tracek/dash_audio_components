@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
-import Sound from 'react-sound';
+import ReactAudioPlayer from 'react-audio-player';
 import PropTypes from 'prop-types';
 
 /**
  * DashAudioComponent to play sounds.
  */
 export default class DashAudioComponents extends Component {
-    setStateByEvent(e) {
-        if (e.position >= this.props.stopPosition) {
-            this.setState({playStatus: Sound.status.PAUSED})
-        }
-    }
     render() {
+        const props = {...this.props, ...this.props.overrideProps};
+        let src = props.src;
+        if (props.from_position && props.to_position) {
+            src = `${src}#t=${props.from_position},${props.to_position}`;
+        }
         return (
-            <Sound
-                {...this.props}
-                {...this.props.overrideProps}
-                onPlaying={this.setStateByEvent.bind(this)}
+            <ReactAudioPlayer
+                style={props.style}
+                src={src}
+                autoPlay={props.autoPlay}
+                controls={props.controls}
             />
         );
     }
@@ -24,29 +25,45 @@ export default class DashAudioComponents extends Component {
 
 DashAudioComponents.defaultProps = {};
 const propTypesDefinitions = {
-    url: PropTypes.string.isRequired,
-    playStatus: PropTypes.oneOf(Object.keys(Sound.status)).isRequired,
-    position: PropTypes.number,
-    stopPosition: PropTypes.number,
-    playFromPosition: PropTypes.number,
-    volume: PropTypes.number,
-    playbackRate: PropTypes.number,
-    autoLoad: PropTypes.bool,
-    loop: PropTypes.bool,
+    src: PropTypes.string.isRequired,
+    autoPlay: PropTypes.bool.isRequired,
+    style: PropTypes.objectOf(PropTypes.string),
+    from_position: PropTypes.number,
+    to_position: PropTypes.number,
+    controls: PropTypes.bool,
 };
 DashAudioComponents.propTypes = {
     /**
-     * The ID used to identify this component in Dash callbacks
+     * The ID used to identify this component in Dash callbacks.
      */
     id: PropTypes.string,
+    /**
+     * Override existing properties, can be used
+     * to change all properties in one callback.
+     */
     overrideProps: PropTypes.shape(propTypesDefinitions),
-    url: PropTypes.string.isRequired,
-    playStatus: PropTypes.oneOf(Object.keys(Sound.status)).isRequired,
-    position: PropTypes.number,
-    stopPosition: PropTypes.number,
-    playFromPosition: PropTypes.number,
-    volume: PropTypes.number,
-    playbackRate: PropTypes.number,
-    autoLoad: PropTypes.bool,
-    loop: PropTypes.bool,
+    /**
+     * Source of audio file.
+     */
+    src: PropTypes.string.isRequired,
+    /**
+     * Play automatically on src change.
+     */
+    autoPlay: PropTypes.bool.isRequired,
+    /**
+     * Styles for audio component.
+     */
+    style: PropTypes.objectOf(PropTypes.string),
+    /**
+     * 'From' position in seconds. Will be appended to src.
+     */
+    from_position: PropTypes.number,
+    /**
+     * 'To' position in seconds. Will be appended to src.
+     */
+    to_position: PropTypes.number,
+    /**
+     * Show controls UI.
+     */
+    controls: PropTypes.bool,
 };

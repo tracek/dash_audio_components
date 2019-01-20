@@ -25,14 +25,16 @@ app.layout = html.Div([
         id='playAudio',
         className='button'
     ),
-    html.Div(id='output'),
     dash_audio_components.DashAudioComponents(
         id='audio-player',
-        url='https://storage.googleapis.com/audio-files-samples/SampleAudio_0.4mb.mp3',
-        playStatus=PlayStatuses.STOPPED.value,
-        playFromPosition=1000,
-        stopPosition=3000
-    )
+        src='https://storage.googleapis.com/audio-files-samples/SampleAudio_0.4mb.mp3',
+        autoPlay=True,
+        from_position=1.1,
+        to_position=3.5,
+        style={'display': 'none',
+               'width': 0, 'height': 0},
+        controls=False
+    ),
 ])
 
 @app.callback(
@@ -43,25 +45,10 @@ app.layout = html.Div([
 )
 def btn_click_play_callback(n_clicks):
     if n_clicks is not None:
-        return {'playStatus': (PlayStatuses.PLAYING.value
-                               if n_clicks % 2 != 0
-                               else PlayStatuses.STOPPED.value),
-                'volume': 30}
-
-@app.callback(
-    Output('output', 'children'),
-    [
-        Input('playAudio', 'n_clicks')
-    ]
-)
-def btn_click_output_callback(n_clicks):
-    status = 'Not clicked'
-    if n_clicks is not None:
-        status = (PlayStatuses.PLAYING.value
-                  if n_clicks % 2 != 0
-                  else PlayStatuses.STOPPED.value)
-    return status
-
+        return {'src': (''
+                        if n_clicks % 2 != 0
+                        else 'https://storage.googleapis.com/audio-files-samples/'
+                             'SampleAudio_0.4mb.mp3')}
 
 if __name__ == '__main__':
     app.run_server(debug=True)
